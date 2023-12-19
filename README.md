@@ -1,9 +1,9 @@
 # *ispathvalid & mustBeValidPath*: Validate path syntax, type, and extension
 
 [![View on GitHub](https://img.shields.io/badge/GitHub-Repository-171515)](https://github.com/WD40andTape/validatepath)
-<!--[![View on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)]()-->
+[![View on File Exchange](https://www.mathworks.com/matlabcentral/images/matlab-file-exchange.svg)](https://mathworks.com/matlabcentral/fileexchange/156607-validate-path-syntax-type-and-extension)
 
-The typical use case is to validate save/export paths at the start of a script/function, and to provide detailed feedback to the user if validation fails.
+The typical use case is to check paths at the start of a script/function before saving/exporting, with human readable feedback if validation fails.
 
 ## Syntax
 
@@ -13,7 +13,7 @@ The typical use case is to validate save/export paths at the start of a script/f
 
 `tf = isvalidpath( inputPath, "file", validExtensions )` also checks that `inputPath` contains a file extension from a provided set, `validExtensions`.
 
-`[ tf, Log ] = isvalidpath( __ )` additionally returns formatted log messages. `Log.warning` explains why a path is not valid. `Log.info` provides formatting tips. Use the `disp` function to print the log to the command window.
+`[ tf, Log ] = isvalidpath( __ )` additionally returns formatted log messages. `Log.warning` explains why a path is not valid. `Log.info` provides formatting tips. Use the [`disp`](https://mathworks.com/help/matlab/ref/disp.html) function to print the log to the command window.
 
 `mustBeValidPath( inputPath, pathType, validExtensions )` function identically to `isvalidpath` but throws an error if the path format is not valid. `pathType` and `validExtensions` are optional.
 
@@ -30,7 +30,7 @@ The typical use case is to validate save/export paths at the start of a script/f
 | Argument | Description |
 | --- | --- |
 | `tf` | Whether the path valid or not according to the above options.<br>Logical scalar. |
-| `Log` | Formatted log messages. Struct scalar with the fields:<ul><li>`warning` - String. Explains why the path is not valid, or states when the location is ambiguous, e.g., `"C:\example"` could be either a directory or a file without an extension. Possible `warning` messages:</li><ul><li>Invalid path as per platform rules, e.g., `"dir\dir\dir\:"`.</li><li>Directory path includes a file extension, e.g., `"dir\file.ext"`.</li><li>File path lacks a file name, e.g., `"dir\"`.</li><li>File path missing valid user-specified extension, e.g., `"dir\file"`.</li><li>Path could be a file OR a directory, e.g., `"dir\ambiguous"`. The path may still be valid.</li></ul><li>`info` - String. Contains additional formatting information and explains formatting issues which will not affect the use of path in practice, as they are handled correctly by the platform. Possible `info` messages:</li><ul><li>Path altered by platform during parsing, e.g., any of the below.</li><li>Redundant name elements removed by platform, e.g., `".\dir"`.</li><li>Path has incorrect separators for platform, e.g., `"dir\dir/dir"`.</li><li>Path includes consecutive separators, e.g., `"dir//dir/"`.</li></ul></ul>If there are no messages, the fields of `Log` will be `""`, i.e., a zero length string. Use the `disp` function to print the messages to the command window, e.g., `disp( Log.warning )`. |
+| `Log` | Formatted log messages. Struct scalar with the fields:<ul><li>`warning` - String. Explains why the path is not valid, or states when the location is ambiguous, e.g., `"C:\example"` could be either a directory or a file without an extension. Possible `warning` messages:</li><ul><li>Invalid path as per platform rules, e.g., `"dir\dir\dir\:"`.</li><li>Directory path includes a file extension, e.g., `"dir\file.ext"`.</li><li>File path lacks a file name, e.g., `"dir\"`.</li><li>File path missing valid user-specified extension, e.g., `"dir\file"`.</li><li>Path could be a file OR a directory, e.g., `"dir\ambiguous"`. The path may still be valid.</li></ul><li>`info` - String. Contains additional formatting information and explains formatting issues which will not affect the use of path in practice, as they are handled correctly by the platform. Possible `info` messages:</li><ul><li>Path altered by platform during parsing, e.g., any of the below.</li><li>Redundant name elements removed by platform, e.g., `".\dir"`.</li><li>Path has incorrect separators for platform, e.g., `"dir\dir/dir"`.</li><li>Path includes consecutive separators, e.g., `"dir//dir/"`.</li></ul></ul>If there are no messages, the fields of `Log` will be `""`, i.e., a zero length string. Use the [`disp`](https://mathworks.com/help/matlab/ref/disp.html) function to print the messages to the command window, e.g., `disp( Log.warning )`. |
 
 ## Example
 
